@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    <title>{{ user.username }} - Edit</title>
+{% endblock %}
+{% block body %}
+    <h1 class="mb-4">{{ user.username }} - Edit</h1>
+
+    <h3>Edit Profile</h3>
+
+    <form method="post">
+        {%  csrf_token %}
+        {{ form.as_p }}
+
+        <button type="submit">Edit Profile</button>
+    </form>
+
+{% endblock %}

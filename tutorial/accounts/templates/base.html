@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block title %}
+        <title>Home</title>
+    {% endblock %}
+
+    {% block head_links %}
+        <link rel="stylesheet" type="text/css" href="{% static 'accounts/bootstrap/bootstrap.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'accounts/css/styles.css' %}">
+        <script src="{% static 'accounts/js/jquery.js' %}"></script>
+        <script src="{% static 'accounts/js/poper.js' %}"></script>
+        <script src="{% static 'accounts/bootstrap/bootstrap.js' %}"></script>
+    {% endblock %}
+
+</head>
+<body>
+    <div class="container">
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark mt-3 mb-4">
+          <a class="navbar-brand" href="{% url 'home:home' %}">Website</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav nav">
+                  {% if user.is_authenticated %}
+                       <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'accounts:profile' %}">{{ user.username }}</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="{% url 'accounts:edit_profile' %}">Edit profile</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="{% url 'accounts:change_password' %}">Change Password</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="{% url 'accounts:logout' %}">Logout</a>
+                      </li>
+
+                  {% else %}
+                      <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'accounts:login' %}">Login</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="{% url 'accounts:register' %}">Register</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="{% url 'accounts:password_reset' %}">Reset Password</a>
+                      </li>
+
+                  {% endif %}
+            </ul>
+          </div>
+        </nav>
+
+        {% block body %}
+        {% endblock %}
+    </div>
+</body>
+</html>
